@@ -14,6 +14,7 @@ class MoviesTest < ApplicationSystemTestCase
     visit movies_url
     click_on "New Movie"
 
+    fill_in "Description", with: @movie.description
     fill_in "Rating", with: @movie.rating
     fill_in "Title", with: @movie.title
     fill_in "User", with: @movie.user_id
@@ -27,6 +28,7 @@ class MoviesTest < ApplicationSystemTestCase
     visit movies_url
     click_on "Edit", match: :first
 
+    fill_in "Description", with: @movie.description
     fill_in "Rating", with: @movie.rating
     fill_in "Title", with: @movie.title
     fill_in "User", with: @movie.user_id

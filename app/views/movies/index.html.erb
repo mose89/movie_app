@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Title</th>
+      <th>Description</th>
       <th>Rating</th>
       <th>User</th>
       <th colspan="3"></th>
@@ -16,9 +17,9 @@
     <% @movies.each do |movie| %>
       <tr>
         <td><%= movie.title %></td>
+        <td><%= movie.description %></td>
         <td><%= movie.rating %></td>
         <td><%= movie.user_id %></td>
-        <td><%= movie.image %></td>
         <td><%= link_to 'Show', movie %></td>
         <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
         <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
