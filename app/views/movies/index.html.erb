@@ -1,33 +1,58 @@
-<p id="notice"><%= notice %></p>
+<div class="text-center">
+  <% if current_user %>
+    <p> <%= "Welcome #{current_user.name}!" %> </p><br>
+      <%= link_to(destroy_user_session_path, method: :delete) do %>
+        <h3 class="btn btn-primary"> Log Out </h3>
+      <% end %>
+    </div>
+  <% else %>
+  <h3> <%= link_to "Log in to add a movie or to leave a review", new_user_session_path %>
+    </h3>
+  <% end %>
+  <br>
 
-<h1>Movies</h1>
+<div class="wrapper">
+  <div class="container">
+    <table>
+      <td>
+        <div class="col-md-3">
+          <% @movies.each do |movie| %>
+            <tr>
+              <td>
+                <strong><h2><%= movie.title %></h2></strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <%= image_tag movie.image.url(:medium) %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong><h3> Rating: <%= movie.rating %></h3></strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <%= link_to(movie_path(movie)) do%>
+                <h3 class="btn btn-lg btn-primary"> Read More </h3>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </div>
+      </td>
+    </table>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Rating</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
-        <td><%= movie.title %></td>
-        <td><%= movie.description %></td>
-        <td><%= movie.rating %></td>
-        <td><%= movie.user_id %></td>
-        <td><%= link_to 'Show', movie %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+
+  <br>
+  <div class="container">
+    <%= link_to(new_movie_path) do %>
+    <div class="text-center">
+      <p class="btn btn-lg btn-danger"> Add New Movie</p>
+    </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Movie', new_movie_path %>
+  </div>

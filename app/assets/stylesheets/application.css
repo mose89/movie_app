@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+.wrapper {
+  background-color: red;
+  opacity: 0.9;
+  color: white;
+}
+.blue {
+  background: grey;
+}
+
+p {
+  font-size: 30px;
+}
+
+.color-white {
+  color:white;
+}

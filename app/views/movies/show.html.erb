@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<p>
+  <%= image_tag @movie.image.url(:medium) %>
+</p>
 
 <p>
   <strong>Title:</strong>
@@ -16,9 +18,25 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @movie.user_id %>
+  <strong>Created By:</strong>
+  <%= @movie.user.name %>
 </p>
 
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+<% if @movie.user_id == current_user.id %>
+  <%= link_to(edit_movie_path(@movie)) do %>
+  <div class="btn btn-danger">Edit</div>
+  <% end %>
+</div>
+
+  <%= link_to(@movie, method: :delete, data: { confirm: 'Are you sure?' }) do%>
+   <div class="btn btn-danger">Delete Movie</div>
+  <% end %>
+</div>
+<% end %>
+
+<div class="btn btn-lg btn-primary">
+    <%= link_to(movies_path) do %>
+      <div class="color-white">Back</div>
+    <% end %>
+  </div>
+</div>
