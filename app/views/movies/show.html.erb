@@ -22,14 +22,16 @@
   <%= @movie.user.name %>
 </p>
 
-<% if @movie.user_id == current_user.id %>
-  <%= link_to(edit_movie_path(@movie)) do %>
-  <div class="btn btn-danger">Edit</div>
-  <% end %>
-</div>
+<% if current_user %>
+  <% if @movie.user_id == current_user.id %>
+    <%= link_to(edit_movie_path(@movie)) do %>
+      <div class="btn btn-danger">Edit</div>
+    <% end %>
+      </div>
 
-  <%= link_to(@movie, method: :delete, data: { confirm: 'Are you sure?' }) do%>
-   <div class="btn btn-danger">Delete Movie</div>
+    <%= link_to(@movie, method: :delete, data: { confirm: 'Are you sure?' }) do%>
+     <div class="btn btn-danger">Delete Movie</div>
+    <% end %>
   <% end %>
 </div>
 <% end %>
