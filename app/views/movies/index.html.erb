@@ -1,52 +1,39 @@
 <div class="text-center">
   <% if current_user %>
-    <p> <%= "Welcome #{current_user.name}!" %> </p><br>
+    <p> <%= "Welcome #{current_user.name}!" %>
+    </p><br>
       <%= link_to(destroy_user_session_path, method: :delete) do %>
-        <h3 class="btn btn-primary"> Log Out </h3>
+        <h3 class="btn btn-primary"> Log Out
+        </h3>
       <% end %>
-    </div>
   <% else %>
-  <h3> <%= link_to "Log in to add a movie or to leave a review", new_user_session_path %>
+    <h3> <%= link_to "Log in to add a movie or to leave a review", new_user_session_path %>
     </h3>
   <% end %>
+</div>
+
   <br>
 
 <div class="wrapper">
-  <div class="container">
-    <table>
-      <td>
-        <div class="col-md-3">
-          <% @movies.each do |movie| %>
-            <tr>
-              <td>
-                <strong><h2><%= movie.title %></h2></strong>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= image_tag movie.image.url(:medium) %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong><h3> Rating: <%= movie.rating %></h3></strong>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= link_to(movie_path(movie)) do%>
-                <h3 class="btn btn-lg btn-primary"> Read More </h3>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
+ <div class="container">
+  <row>
+    <% @movies.each do |movie| %>
+      <div class="col-md-4">
+        <strong>
+          <h2><%= movie.title %></h2>
+        </strong>
+        <%= image_tag(movie.image.url(:medium), size: "240x270") %>
+        <strong>
+          <h3> Rating: <%= movie.rating %></h3>
+        </strong>
+        <%= link_to(movie_path(movie)) do%>
+          <h3 class="btn btn-lg btn-primary"> Read More </h3>
+        <% end %>
         </div>
-      </td>
-    </table>
+      <% end %>
+    </row>
   </div>
 </div>
-
-
 
   <br>
   <div class="container">
