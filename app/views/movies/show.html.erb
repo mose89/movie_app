@@ -1,27 +1,33 @@
-<p>
-  <%= image_tag @movie.image.url(:medium) %>
-</p>
+<div class="wrapper show">
+  <div class="row">
+    <div class="col-md-6">
+      <p>
+        <%= image_tag(@movie.image.url(:medium), size: "400x400") %>
+      </p>
+      <p>
+        <strong>Title:</strong>
+        <%= @movie.title %>
+      </p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @movie.title %>
-</p>
+      <p>
+        <strong>Description:</strong>
+        <%= @movie.description %>
+      </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @movie.description %>
-</p>
+      <p>
+        <strong>Rating:</strong>
+        <%= @movie.rating %>
+      </p>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @movie.rating %>
-</p>
+      <p>
+        <strong>Created By:</strong>
+        <%= @movie.user.name %>
+      </p>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Created By:</strong>
-  <%= @movie.user.name %>
-</p>
-
+<div class="wrapper">
 <% if current_user %>
   <% if @movie.user_id == current_user.id %>
     <%= link_to(edit_movie_path(@movie)) do %>
@@ -36,9 +42,11 @@
 </div>
 <% end %>
 
+
 <div class="btn btn-lg btn-primary">
     <%= link_to(movies_path) do %>
       <div class="color-white">Back</div>
     <% end %>
   </div>
 </div>
+
