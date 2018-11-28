@@ -1,22 +1,22 @@
-<div class="text-center">
-  <% if current_user %>
-    <p> <%= "Welcome #{current_user.name}!" %>
-    </p><br>
-      <%= link_to(destroy_user_session_path, method: :delete) do %>
-        <h3 class="btn btn-primary"> Log Out
-        </h3>
-      <% end %>
-  <% else %>
-    <h3> <%= link_to "Log in to add a movie or to leave a review", new_user_session_path %>
-    </h3>
-  <% end %>
-</div>
+  <div class="text-center">
+    <% if current_user %>
+      <p> <%= "Welcome #{current_user.name}!" %>
+      </p><br>
+        <%= link_to(destroy_user_session_path, method: :delete) do %>
+          <h3 class="btn btn-primary"> Log Out
+          </h3>
+        <% end %>
+    <% else %>
+      <h3> <%= link_to "Login to add a movie or to leave a review", new_user_session_path %>
+      </h3>
+    <% end %>
+  </div>
 
   <br>
 
 <div class="wrapper">
  <div class="container">
-  <row>
+  <div class="row">
     <% @movies.each do |movie| %>
       <div class="col-md-4">
         <strong>
@@ -24,9 +24,9 @@
         </strong>
         <%= image_tag(movie.image.url(:medium), size: "240x270") %>
         <strong>
-          <h3> Rating: <%= movie.rating %></h3>
+          <h3> Rating: <%= movie.reviews.average(:rating).round(2) unless movie.reviews.blank?%></h3>
         </strong>
-        <%= link_to(movie_path(movie)) do%>
+        <%= link_to(movie_path(movie.id)) do%>
           <h3 class="btn btn-lg btn-primary"> Read More </h3>
         <% end %>
         </div>
@@ -38,10 +38,18 @@
   <br>
   <div class="wrapper">
     <div class="container">
-      <%= link_to(new_movie_path) do %>
+      <% if current_user %>
+        <%= link_to(new_movie_path) do %>
+          <div class="text-center">
+            <div class="btn btn-lg btn-primary"> Add New Movie</div>
+          </div>
+        <% end %>
+      <% else %>
+      <%= link_to(new_user_registration_path) do  %>
       <div class="text-center">
-        <p class="btn btn-lg btn-danger"> Add New Movie</p>
+        <div class="btn btn-lg btn-primary"> Sign up</div>
       </div>
       <% end %>
-    </div>
+    <% end %>
   </div>
+</div>
